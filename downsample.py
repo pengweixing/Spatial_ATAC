@@ -7,12 +7,12 @@
 
 import gzip
 import argparse
-import numpy
+import numpy as np
 import random
 import os
 
 parser = argparse.ArgumentParser(usage="python ")
-parser.add_argument('-n',"--number",help="the number of reads reserved", default=2000000,type=int)
+parser.add_argument('-n',"--number",help="the number of reads reserved", default=200000,type=int)
 parser.add_argument('-r1',"--reads1",help="the R1 with fastq.gz format", required=True)
 parser.add_argument('-r2',"--reads2",help="the R2 with fastq.gz format", required=True)
 
@@ -52,7 +52,7 @@ for line in f_R2:
     each_block = [line,next(f_R2),next(f_R2),next(f_R2)]
     fastq_block_R2.append(each_block)
 if len(fastq_block_R1) > number:
-    all_number = range(1,len(fastq_block))
+    all_number = range(1,len(fastq_block_R1))
     selected = random.sample(all_number, number)
     fastq_block_R1_array = np.array(fastq_block_R1)
     fastq_block_R2_array = np.array(fastq_block_R2)
